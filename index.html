@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
+    <title>
+      Check-Yo-Self
+    </title>
+  </head>
+  <body>
+    <header>
+      <h1 class="header__header">Check <span class="yellow__text">Yo'</span> Self</h1>
+      <div>
+        <img src="images/search.svg" id="mag-image" alt="picture of a maginifying glass">
+        <input class="header__input" id="search-input" placeholder="Search">
+      </div>
+    </header>
+    <nav class="nav">
+      <form class="nav__form">
+        <label class="nav__lable">Task Title</label>
+        <input class="nav__input" id="quality-input">
+        <label class="nav__lable">Task Item</label>
+        <input class="nav__input" id="quality-input">
+        <button class="nav__button" id="make-task-btn">Make Task List</button>
+        <button class="nav__button" id="clear-btn">Clear All</button>
+      </form>
+      <button class="nav__button" id="urgency-btn">Filter by Urgency</button>
+    </nav>
+    <main>
+      <article>
+        <header>
+        Task Title
+        </header>
+        <section> Task list </section>
+        <footer>
+          <div><img src="images/urgent.svg">URGENT</div>
+          <div><img src="images/delete.svg">DELETE</div>
+        </footer>
+      </article>
+      <article>
+        <header>
+        Task Title
+        </header>
+        <section> Task list </section>
+        <footer>
+          <div><img src="images/urgent.svg">URGENT</div>
+          <div><img src="images/delete.svg">DELETE</div>
+        </footer>
+      </article>
+    </main>
+    <script type="text/javascript" src="todo-list.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+  </body>
+</html>

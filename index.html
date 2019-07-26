@@ -2,34 +2,51 @@
 <html>
   <head>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
     <link rel="stylesheet" type="text/css" href="normalize.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
-    <title>
-      Check-Yo-Self
-    </title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
+    <title>CHECK-YO'-SELF</title>
   </head>
   <body>
     <header>
-      <h1 class="header__header">Check <span class="yellow__text">Yo'</span> Self</h1>
-      <div>
-        <img src="images/search.svg" id="mag-image" alt="picture of a maginifying glass">
-        <input class="header__input" id="search-input" placeholder="Search">
-      </div>
-    </header>
-    <nav class="nav">
-      <form class="nav__form">
-        <label class="nav__lable">Task Title</label>
-        <input class="nav__input" id="quality-input">
-        <label class="nav__lable">Task Item</label>
-        <input class="nav__input" id="quality-input">
-        <button class="nav__button" id="make-task-btn">Make Task List</button>
-        <button class="nav__button" id="clear-btn">Clear All</button>
+      <h1 class="header__text">Check <span class="yellow__text">Yo'</span> SELF</h1>
+      <form class="header__form">
+        <input type="image" src="images/search.svg" id="search-btn" alt="search button">
+        <input type="search" class="header__input" id="search-input" placeholder="Search">
       </form>
-      <button class="nav__button" id="urgency-btn">Filter by Urgency</button>
-    </nav>
+    </header>
+
+
     <main>
+      <nav class="nav">
+        <form class="nav__form">
+          <section>
+            <label class="nav__lable">Task Title</label>
+            <input class="nav__input" id="quality-input">
+          </section>
+          <div class="list__container">
+            <ul>unordered list?
+              <li class="nav__li" data-id="" id="">
+                <input type="image" src="images/delete.svg" class="nav__li--delete">
+                <p class="nav__li--text">task list 1</p>
+              </li>
+              <li class="nav__li" data-id="" id="">
+                <input type="image" src="images/delete.svg" class="nav__li--delete">
+                <p class="nav__li--text">task list 2</p>
+              </li>
+              <li class="nav__li" data-id="" id="">
+                <input type="image" src="images/delete.svg" class="nav__li--delete">
+                <p class="nav__li--text">task list 3</p>
+              </li>
+            </ul>
+          </div>  
+          <label class="nav__lable">Task Item</label>
+          <input class="nav__input" id="quality-input">
+          <button class="nav__button" id="make-task-btn">Make Task List</button>
+          <button class="nav__button" id="clear-btn">Clear All</button>
+        </form>
+        <button class="nav__button" id="urgency-btn">Filter by Urgency</button>
+      </nav>
       <article>
         <header>
         Task Title

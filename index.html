@@ -5,8 +5,6 @@
     <link rel="stylesheet" type="text/css" href="normalize.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
-
-
     <title>CHECK-YO'-SELF</title>
   </head>
   <body>
@@ -22,28 +20,29 @@
         <form class="nav__form">
           <section>
             <label class="nav__lable">Task Title</label>
-            <input class="nav__input" id="quality-input">
+            <input class="nav__input" id="task-title-input">
           </section>
-          <ul class="list__container">unordered list?
+          <ul class="list__container">
+            <!-- unordered list? -->
             <li class="nav__li" data-id="" id="">
               <input type="image" src="images/delete.svg" class="nav__li--delete">
               <p class="nav__li--text">task list 1</p>
             </li>
-<!--             <li class="nav__li" data-id="" id="">
+            <li class="nav__li" data-id="" id="">
               <input type="image" src="images/delete.svg" class="nav__li--delete">
               <p class="nav__li--text">task list 2</p>
             </li>
             <li class="nav__li" data-id="" id="">
               <input type="image" src="images/delete.svg" class="nav__li--delete">
               <p class="nav__li--text">task list 3</p>
-            </li> -->
+            </li>
           </ul>
           <section class="nav___section">
             <div> 
               <label class="nav__lable">Task Item</label>
-              <div class="item-innput">
-                <input type="text" class="nav__input" id="">
-                <input type="image" src="images/plus.svg" class="" disabled>
+              <div class="item-input">
+                <input type="text" class="nav__input" id="task-item-input">
+                <input type="image" src="images/plus.svg" class="add-task-btn" id="add-task-btn" disabled>
               </div>
             </div>
             <input type="submit" class="btn input__btn-make" id="make-task-btn" value="Make Task List">
@@ -53,6 +52,8 @@
         <input type="button" class="btn" id="urgency-btn" value="Filter by Urgency">
       </nav>
       <section class="card__holder">
+
+
       <article class="task__card" data-id="" id="">
         <section class="">
           <h3 class="">Card Title</h3>
@@ -74,6 +75,8 @@
           </div>
         </section>
       </article>
+
+      
       </section>
     </main>
     <script type="text/javascript" src="todo-list.js"></script>

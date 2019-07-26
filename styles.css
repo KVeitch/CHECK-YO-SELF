@@ -6,23 +6,42 @@
   /*border: 1px solid red;*/
 }
 
-/*input[type=image]{
-  height:20px;
-}*/
+body {
+  background-color: #F3F6F7;
+}
 
 header {
   background-color: #1F1F3D;
-  padding:10px;
+  padding:5px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: #FFFFFF;
 }
 
+ul {
+  list-style: none;
+}
+
+nav li {
+  display:flex
+  padding-top: 10px;
+  padding-left: 25px;
+}
+
+/*same as check circle*/
+.nav__li--delete {
+  margin: 2px;
+  outline:none;
+  width: 15px;
+  border: none;
+  height: 15px;
+}
+
 .header__text {
   font-weight: 800;
   height: 36px;
-  margin-bottom: 10px;
+  margin: 10px 0px;
 }
 
 .yellow__text {
@@ -48,4 +67,89 @@ header form {
 .header__input {
   border-radius: 0px 2px 2px 0px;
   width: 220px;
+  border: 0px;
 }
+
+main {
+  display: flex;
+  height: 90%;
+}
+nav {
+  background-color: #587A8A;
+  width: 275px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+nav form section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 0px 10px;
+}
+
+input {
+  height: 40px;
+  outline: none;
+  border: 2px solid #1F1F3D;
+}
+
+.item-input {
+  display: inline-flex;
+}
+
+#task-title-input {
+  width:100%;
+}
+
+.nav__input {
+  width: 215px;
+  margin-bottom: 20px;
+}
+
+.add-task-btn {
+  background-color: #1F1F3D;
+  border: 10px solid #1F1F3D;
+  border-radius: 0px 2px 2px 0px;
+  width: 40px;
+}
+
+.btn {
+  background-color: #1F1F3D;
+  height: 40px;
+  color: #FFFFFF;
+  font-size:15px;
+  margin-bottom:20px;
+}
+
+#urgency-btn{
+  margin: 0px 10px;
+}
+nav form {
+  margin-bottom: 20px;
+  border-bottom: 2px solid #3C6577;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #F3F6F7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,7 +9,6 @@ var listContainer = document.querySelector('.list__container');
 
 //Event Listeners
 header.addEventListener('keyup', headerKeyupHandler);
-header.addEventListener('click', headerClickHandler);
 nav.addEventListener('click', navClickHandler);
 nav.addEventListener('keyup', navKeyupHandler);
 container.addEventListener('click', containerClickHandler);
@@ -19,10 +18,6 @@ function headerKeyupHandler(e) {
   if (e.target.id === 'search-input'){
     searchArticles();
   };
-};
-
-function headerClickHandler(e) {
-  e.preventDefault();
 };
 
 function navClickHandler(e) {
@@ -47,7 +42,7 @@ function navClickHandler(e) {
 
 
 function makeTaskList() {
-  
+
 };
 
 function navKeyupHandler(e) {

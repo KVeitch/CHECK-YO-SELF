@@ -126,6 +126,11 @@ input {
   margin-bottom:20px;
 }
 
+.disabled {
+  color: #1F1F3D;
+  background-color: #C7D3D8; 
+}
+
 #urgency-btn{
   margin: 0px 10px;
 }

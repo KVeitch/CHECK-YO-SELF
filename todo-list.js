@@ -3,15 +3,26 @@ class ToDo {
     this.id = toDoObj.id || Date.now();
     this.title = toDoObj.title;
     this.urgent = toDoObj.urgent || false;
-    this.tasks = toDoObj.tasks || [];
+    this.tasksList = toDoObj.tasksList || [];
   }
   
-  saveToStorage(){};
+  saveToStorage(tasksArray){
+    localStorage.setItem('tasks', JSON.stringify(taskArray))
+  };
 
-  deleteFromStorage(){};
+  deleteFromStorage(tasksArray){
 
-  updateToDo(){};
+    this.saveToStorage(tasksArray)
+  };
+ 
+  updateToDo(tasksArray){
 
-  updateTask(){};
+    this.saveToStorage(tasksArray)
+  };
+
+  updateTask(tasksArray){
+    
+    this.saveToStorage(tasksArray)
+  };
 
 }

@@ -22,9 +22,8 @@
             <label class="nav__lable" for="task-title-input">Task Title</label>
             <input class="nav__input" id="task-title-input">
           </section>
-          <ul class="list__container">
-            <!-- tasks insert here -->
-          </ul>
+            <!-- tasks insert in the ul here -->
+          <ul class="list__container"></ul>
           <section class="nav___section">
             <div> 
               <label class="nav__lable" for="task-item-input">Task Item</label>
@@ -33,14 +32,14 @@
                 <input type="image" src="images/plus.svg" class="add-task-btn" id="add-task-btn">
               </div>
             </div>
-            <input type="button" class="btn input__btn-make" id="make-task-btn" value="Make Task List">
+            <input type="button" class="btn input__btn-make disabled" id="make-task-btn" value="Make Task List" disabled>
             <input type="button" class="btn input__btn-clear" id="clear-btn" value="Clear All">
           </section>
         </form>
         <input type="button" class="btn" id="urgency-btn" value="Filter by Urgency">
       </nav>
+        <!-- Task List Articles insert in container -->
       <container class="card__holder">
-        <!-- Task List Articles insert here -->
         <article class="container__article" data-id="" id="">
           <header class="article__header--title">
             <h3 class="">Card Title</h3>

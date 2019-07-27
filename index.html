@@ -11,7 +11,7 @@
     <header id="header">
       <h1 class="header__text">CHECK <span class="yellow__text">YO'</span> SELF</h1>
       <form class="header__form">
-        <input type="image" src="images/search.svg" class="search-btn" id="search-btn" alt="search button" disabled>
+        <input type="image" src="images/search.svg" class="search-btn" id="search-btn" alt="search button">
         <input type="search" class="search header__input" id="search-input" placeholder="Search">
       </form>
     </header>
@@ -22,7 +22,7 @@
             <label class="nav__lable" for="task-title-input">Task Title</label>
             <input class="nav__input" id="task-title-input">
           </section>
-            <!-- tasks insert in the ul here -->
+            <!-- tasks insert here -->
           <ul class="list__container"></ul>
           <section class="nav___section">
             <div> 
@@ -32,45 +32,14 @@
                 <input type="image" src="images/plus.svg" class="add-task-btn" id="add-task-btn">
               </div>
             </div>
-            <input type="button" class="btn input__btn-make disabled" id="make-task-btn" value="Make Task List" disabled>
+            <input type="button" class="btn input__btn-make" id="make-task-btn" value="Make Task List">
             <input type="button" class="btn input__btn-clear" id="clear-btn" value="Clear All">
           </section>
         </form>
         <input type="button" class="btn" id="urgency-btn" value="Filter by Urgency">
       </nav>
-        <!-- Task List Articles insert in container -->
-      <container class="card__holder">
-        <article class="container__article" data-id="" id="">
-          <header class="article__header--title">
-            <h3 class="">Card Title</h3>
-          </header>
-          <ul class="crd--ul" id="" data-id=""> 
-            <li class="article__li" data-id="" id="">
-              <input type="image" src="images/checkbox.svg" class="article__li--checkbox">
-              <p class="ar__li__uncheck crd__li__uncheck">Sub List 1</p>
-            </li>
-            <li class="article__li" data-id="" id="">
-              <input type="image" src="images/checkbox.svg" class="article__li--checkbox">
-              <p class="ar__li__uncheck crd__li__uncheck">Sub List 2</p>
-            </li>
-            <li class="article__li" data-id="" id="">
-              <input type="image" src="images/checkbox.svg" class="article__li--checkbox">
-              <p class="ar__li__uncheck crd__li__uncheck">Sub List 3</p>
-            </li>                        
-          </ul>
-          <footer class="article__footer bottom--crd--stn">
-            <div class="article__div--urgent">
-              <input type="image" src="images/urgent.svg" id="btn--urgent" class="article__input--btn article__urgent">
-              <p class="article__footer--text">URGENT</p>
-            </div>
-            <div class="article__div--delete">
-              <input type="image" src="images/delete.svg" id="btn--delete" class="article__input--btn article__delete" disabled="">
-              <p class="article__footer--text">DELETE</p>
-            </div>
-          </footer>
-        </article>
-
-      </container>
+      <!-- Task List Articles insert here -->
+      <container class="card__holder"></container>
     </main>
     <script type="text/javascript" src="todo-list.js"></script>
     <script type="text/javascript" src="main.js"></script>

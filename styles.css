@@ -150,6 +150,8 @@ container {
   width: 100%;
 }
 
+/*Inserted Article Styles*/
+
 article {
   width: 275px;
   background-color: #FAFDFF;
@@ -157,6 +159,7 @@ article {
   break-inside: avoid;
   margin-bottom: 12px;
   padding: 1px;
+  color: #1F1F3D;
 }
 
 .urgent {
@@ -223,6 +226,10 @@ article div {
   justify-content: center;
 }
 
+.checked {
+  color: #3C6577;
+  font-style: italic;
+}
 
 
 

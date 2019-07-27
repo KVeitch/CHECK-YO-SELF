@@ -21,10 +21,6 @@ function headerKeyupHandler(e) {
   };
 };
 
-function containerClickHandler(e) {
-  e.preventDefault()
-};
-
 function navClickHandler(e) {
   e.preventDefault();
   
@@ -50,6 +46,13 @@ function navKeyupHandler(e) {
   toggleMakeTaskBtn();
 };
 
+function containerClickHandler(e) {
+  e.preventDefault()
+  if (e.target.classList.contains('article__li--checkbox')) {
+    checkBox(e);
+  };
+};
+
 // Other Functions
 function repopulate() {
   initialTaskArray();
@@ -61,6 +64,27 @@ function persistOnLoad() {
    displayToDo(taskList);
   });
 };
+
+function checkBox(e) {
+  if (e.target.src.includes('images/checkbox.svg')) {
+    e.target.src = 'images/checkbox-active.svg';
+    e.target.parentNode.childNodes[1].classList.add('checked');
+  } else {
+    e.target.src = 'images/checkbox.svg'
+    e.target.parentNode.childNodes[1].classList.remove('checked');
+  };
+};
+
+
+function getTaskId(e) {
+  return e.target.closest('li').id
+};
+
+function getToDoListId(e) {
+  console.log(e.target.closest('article').id)
+ return e.target.closest('article').id;
+}
+
 
 function displayToDo(toDoList) {
   var urgent;
@@ -82,7 +106,7 @@ function displayToDo(toDoList) {
           <p class="article__footer--text">URGENT</p>
         </div>
         <div class="article__div--delete">
-          <input type="image" src="images/delete.svg" id="btn--delete" class="article__input--btn article__delete" disabled="">
+          <input type="image" src="images/delete.svg" id="btn--delete" class="article__input--btn article__delete" disabled>
           <p class="article__footer--text">DELETE</p>
         </div>
       </footer>
@@ -91,19 +115,14 @@ function displayToDo(toDoList) {
 };
 
 function liList(taskList) {
-  var checked = 'checkbox.svg';
-  var liForContainer = '';
+  var checked;
+  var liForList = '';
   taskList.tasksList.forEach(function(li) {
-    if(li.checked === true){
-      checked = 'checkbox-active.svg'
-    }
-    liForContainer = liForContainer + `<li id="${li.taskId}"><input type="image" class="article__input--btn" src="images/${checked}"> ${li.taskText}</li>`
+    li.checked ? checked = 'checkbox-active.svg' : checked = 'checkbox.svg';
+    liForList = liForList + `<li id="${li.taskId}"><input type="image" class="article__li--checkbox" src="images/${checked}"><p class="normal">${li.taskText}<p></li>`
   });
-  return liForContainer;
+  return liForList;
 };
-
-
-
 
 function initialTaskArray() {
   if (JSON.parse(localStorage.getItem('tasks')) === null) {
@@ -122,7 +141,8 @@ function makeTaskList() {
                            tasksList: tasksList,
                            urgernt: false,
                           });
-  taskArray.push(todoList)
+  taskArray.push(todoList);
+  displayToDo(todoList);
   todoList.saveToStorage(taskArray);
 
 };

@@ -62,18 +62,19 @@ function persistOnLoad() {
   });
 };
 
-function displayToDo(taskList) {
+function displayToDo(toDoList) {
   var urgent;
   var ugrentClass;
   container.insertAdjacentHTML(
     "afterbegin",
-    `<article class="container__article" data-id="${taskList.id}" id="${taskList.id}">
+    `<article class="container__article" data-id="${toDoList.id}" id="${toDoList.id}">
       <header class="article__header--title">
-        <h3 class="">${taskList.title}</h3>
+        <h3 class="">${toDoList.title}</h3>
       </header>
       <!-- List inserts under here -->
       <ul class="crd--ul" id="" data-id=""> 
-        <li>Card pop</li>                        
+        <!-- insert li list -->
+        ${liList(toDoList)}
       </ul>
       <footer class="article__footer bottom--crd--stn">
         <div class="article__div--urgent">
@@ -88,6 +89,20 @@ function displayToDo(taskList) {
     </article>`
   );
 };
+
+function liList(taskList) {
+  var checked = 'checkbox.svg';
+  var liForContainer = '';
+  taskList.tasksList.forEach(function(li) {
+    if(li.checked === true){
+      checked = 'checkbox-active.svg'
+    }
+    liForContainer = liForContainer + `<li id="${li.taskId}"><input type="image" class="article__input--btn" src="images/${checked}"> ${li.taskText}</li>`
+  });
+  return liForContainer;
+};
+
+
 
 
 function initialTaskArray() {

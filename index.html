@@ -19,7 +19,7 @@
       <nav class="nav">
         <form class="nav__form">
           <section>
-            <label class="nav__lable">Task Title</label>
+            <label class="nav__lable" for="task-title-input">Task Title</label>
             <input class="nav__input" id="task-title-input">
           </section>
           <ul class="list__container">
@@ -39,7 +39,7 @@
           </ul>
           <section class="nav___section">
             <div> 
-              <label class="nav__lable">Task Item</label>
+              <label class="nav__lable" for="task-item-input">Task Item</label>
               <div class="item-input">
                 <input type="text" class="nav__input" id="task-item-input">
                 <input type="image" src="images/plus.svg" class="add-task-btn" id="add-task-btn" disabled>
@@ -51,33 +51,41 @@
         </form>
         <input type="button" class="btn" id="urgency-btn" value="Filter by Urgency">
       </nav>
-      <section class="card__holder">
+      <container class="card__holder">
 
 
-      <article class="task__card" data-id="" id="">
-        <section class="">
-          <h3 class="">Card Title</h3>
-        </section>
-        <ul class="crd--ul" id="" data-id=""> 
-          <li class="crd__li" data-id="" id="">
-            <input type="image" src="images/checkbox.svg" class="crd__li__check">
-            <p class="crd__li__uncheck crd__li__uncheck">Sub List 1</p>
-          </li>
-        </ul>
-        <section class="crd--stn bottom--crd--stn">
-          <div class="crd--urgent--div">
-            <input type="image" src="images/urgent.svg" id="crd__btn__urgent" class="crd__btn crd__urgent">
-            <p class="crd__text">URGENT</p>
-          </div>
-          <div class="crd--delete--div">
-            <input type="image" src="images/delete.svg" id="crd__btn__delete" class="crd__btn crd__delete" disabled="">
-            <p class="crd__text">DELETE</p>
-          </div>
-        </section>
-      </article>
+        <article class="container__article" data-id="" id="">
+          <header class="article__header--title">
+            <h3 class="">Card Title</h3>
+          </header>
+          <ul class="crd--ul" id="" data-id=""> 
+            <li class="article__li" data-id="" id="">
+              <input type="image" src="images/checkbox.svg" class="article__li--checkbox">
+              <p class="ar__li__uncheck crd__li__uncheck">Sub List 1</p>
+            </li>
+            <li class="article__li" data-id="" id="">
+              <input type="image" src="images/checkbox.svg" class="article__li--checkbox">
+              <p class="ar__li__uncheck crd__li__uncheck">Sub List 2</p>
+            </li>
+            <li class="article__li" data-id="" id="">
+              <input type="image" src="images/checkbox.svg" class="article__li--checkbox">
+              <p class="ar__li__uncheck crd__li__uncheck">Sub List 3</p>
+            </li>                        
+          </ul>
+          <footer class="article__footer bottom--crd--stn">
+            <div class="article__div--urgent">
+              <input type="image" src="images/urgent.svg" id="btn--urgent" class="article__input--btn article__urgent">
+              <p class="article__footer--text">URGENT</p>
+            </div>
+            <div class="article__div--delete">
+              <input type="image" src="images/delete.svg" id="btn--delete" class="article__input--btn article__delete" disabled="">
+              <p class="article__footer--text">DELETE</p>
+            </div>
+          </footer>
+        </article>
 
 
-      </section>
+      </container>
     </main>
     <script type="text/javascript" src="todo-list.js"></script>
     <script type="text/javascript" src="main.js"></script>

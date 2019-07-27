@@ -74,6 +74,7 @@ main {
   display: flex;
   height: 90%;
 }
+
 nav {
   background-color: #587A8A;
   width: 275px;
@@ -139,9 +140,83 @@ label {
   color: #F3F6F7;
 }
 
+container {
+  padding: 10px;
+  width: 100%;
+}
 
+article {
+  width: 275px;
+  background-color: #FAFDFF;
+  border: 2px solid #C7D3D8;
+  break-inside: avoid;
+  margin-bottom: 12px;
+  padding: 1px;
+}
 
+.urgent {
+  width:275px;
+  background-color: #FFE89D;
+  border: 2px solid #FFC30C;
+  break-inside: avoid;
+  margin-bottom: 12px;
+  padding: 1px;
+  color: #1F1F3D;
+}
 
+article ul {
+  padding: 10px;
+  border-top: 2px solid #C7D3D8;
+
+}
+
+article li {
+  display: flex;
+}
+
+.article__li--checkbox{
+  height: 15px;
+  width: 15px;
+  outline: none;
+  margin: 3px;
+}
+
+article header {
+  background-color: #FAFDFF;
+}
+.article__header--title {
+  color: #1F1F3D;
+  font-size: 20px;
+}
+
+article input {
+  border: 0px;
+}
+
+article footer{
+  display:flex;
+  justify-content: space-between;
+  border-top: 2px solid #C7D3D8;
+}
+
+.article__input--btn {
+  height: 15px;
+  margin: 3px;
+  outline: none;
+  width:15px;
+}
+
+.article__footer--text {
+  color:#3C6577;
+  font-size: 10px;
+}
+
+article div {
+  display: flex;
+  flex-wrap: wrap;
+  width:55px;
+  justify-content: center;
+}
 
 
 

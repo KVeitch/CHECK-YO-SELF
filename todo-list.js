@@ -15,13 +15,11 @@ class ToDo {
     this.saveToStorage(tasksArray)
   };
  
-  updateToDo(tasksArray){
-
-    this.saveToStorage(tasksArray)
+  updateTask(storageArray){
+    this.saveToStorage(storageArray)
   };
 
   updateTask(tasksArray){
-    
     this.saveToStorage(tasksArray)
   };
 

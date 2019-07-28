@@ -162,15 +162,6 @@ article {
   color: #1F1F3D;
 }
 
-.urgent {
-  width:275px;
-  background-color: #FFE89D;
-  border: 2px solid #FFC30C;
-  break-inside: avoid;
-  margin-bottom: 12px;
-  padding: 1px;
-  color: #1F1F3D;
-}
 
 article ul {
   padding: 10px;
@@ -192,6 +183,7 @@ article li {
 article header {
   background-color: #FAFDFF;
 }
+
 .article__header--title {
   color: #1F1F3D;
   font-size: 20px;
@@ -231,8 +223,28 @@ article div {
   font-style: italic;
 }
 
+.urgent {
+  width:275px;
+  background-color: #FFE89D;
+  border: 2px solid #FFC30C;
+  break-inside: avoid;
+  margin-bottom: 12px;
+  padding: 1px;
+  color: #1F1F3D;
+}
 
+.urgentHeader {
+  background-color: #FFE89D;
+  color: #1F1F3D;
+}
 
+.ulUrgentBorder {
+  border-top: 2px solid #FFC30C;
+}
+
+.urgentTxt {
+  color: #B23A25;
+}
 
 
 

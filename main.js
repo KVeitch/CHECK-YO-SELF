@@ -43,6 +43,7 @@ function navClickHandler(e) {
 function navKeyupHandler(e) {
   if (e.target.id === 'task-title-input'  ||  e.target.id === 'task-item-input') {
     toggleMakeTaskBtn();
+    toggleClearAllBtn()
   };
 
   if(e.key === 'Enter') {
@@ -86,7 +87,7 @@ function removeIntro() {
   if (element) {
     element.parentNode.removeChild(element);
   };
-  
+
   injectIntroMessage()  
 };
 

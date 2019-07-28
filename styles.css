@@ -103,12 +103,14 @@ input {
 #task-title-input {
   width:100%;
   border-radius: 3px;
+  padding-left: 10px;
 }
 
 .nav__input {
   width: 215px;
   margin-bottom: 20px;
   border-radius: 3px 0px 0px 3px;
+  padding-left: 10px;
 }
 
 .add-task-btn {
@@ -148,6 +150,8 @@ label {
 container {
   padding: 10px;
   width: 100%;
+  column-count: 3;
+  column-width: 15em;
 }
 
 /*Inserted Article Styles*/
@@ -160,13 +164,12 @@ article {
   margin-bottom: 12px;
   padding: 1px;
   color: #1F1F3D;
+  break-inside: avoid;
 }
-
 
 article ul {
   padding: 10px;
   border-top: 2px solid #C7D3D8;
-
 }
 
 article li {

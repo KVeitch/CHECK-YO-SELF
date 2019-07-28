@@ -48,8 +48,13 @@ function navKeyupHandler(e) {
 
 function containerClickHandler(e) {
   e.preventDefault()
+
   if (e.target.classList.contains('article__li--checkbox')) {
     checkBox(e);
+  };
+
+  if (e.target.classList.contains('article__input--btn')){
+    makeUrgent(e);
   };
 };
 
@@ -59,21 +64,59 @@ function repopulate() {
   persistOnLoad();
 };
 
+
+
 function persistOnLoad() {
   taskArray.forEach(function(taskList) {
    displayToDo(taskList);
   });
 };
 
+function makeUrgent(e) {
+  e.target.closest('article').classList.toggle('urgent');
+  e.target.closest('footer').classList.toggle('ulUrgentBorder');
+  e.target.parentNode.parentNode.parentNode.childNodes[1].classList.toggle('urgentHeader');
+  e.target.parentNode.childNodes[3].classList.toggle('urgentTxt');
+
+  if (e.target.closest('article').classList.contains('urgent')){
+    e.target.parentNode.childNodes[1].src = 'images/urgent-active.svg';
+  } else {
+    e.target.parentNode.childNodes[1].src = 'images/urgent.svg';
+  };
+};
+
+
 function checkBox(e) {
   if (e.target.src.includes('images/checkbox.svg')) {
     e.target.src = 'images/checkbox-active.svg';
     e.target.parentNode.childNodes[1].classList.add('checked');
+    toggleObjCheck(e)
   } else {
-    e.target.src = 'images/checkbox.svg'
+    e.target.src = 'images/checkbox.svg';
     e.target.parentNode.childNodes[1].classList.remove('checked');
+    toggleObjCheck(e)
   };
 };
+
+
+
+// REFACTOR THIS CRAP
+
+
+function toggleObjCheck(e) {
+  taskArray.forEach(function(toDoList){
+    toDoList.tasksList.forEach(function(task){
+      if (task.taskId === getTaskId(e)) {
+        task.checked = !task.checked;
+        taskArray[0].saveToStorage(taskArray);
+      };
+    });
+  });
+};
+
+// REALLY THAT UP THERE IS CRAP
+// Pull the index of the toDoList
+// only go through that toDoList
 
 
 function getTaskId(e) {
@@ -81,7 +124,6 @@ function getTaskId(e) {
 };
 
 function getToDoListId(e) {
-  console.log(e.target.closest('article').id)
  return e.target.closest('article').id;
 }
 
@@ -116,10 +158,11 @@ function displayToDo(toDoList) {
 
 function liList(taskList) {
   var checked;
+  var fontStyle;
   var liForList = '';
   taskList.tasksList.forEach(function(li) {
-    li.checked ? checked = 'checkbox-active.svg' : checked = 'checkbox.svg';
-    liForList = liForList + `<li id="${li.taskId}"><input type="image" class="article__li--checkbox" src="images/${checked}"><p class="normal">${li.taskText}<p></li>`
+    li.checked ? (checked = 'checkbox-active.svg', fontStyle = 'checked') : (checked = 'checkbox.svg', fontStyle = '');
+    liForList = liForList + `<li id="${li.taskId}"><input type="image" class="article__li--checkbox" src="images/${checked}"><p class="${fontStyle}">${li.taskText}<p></li>`
   });
   return liForList;
 };

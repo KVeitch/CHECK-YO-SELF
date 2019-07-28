@@ -1,4 +1,4 @@
-// Global Variables
+// Global Variables 
 var taskArray = [];
 
 // Document Query Selector
@@ -9,18 +9,12 @@ var listContainer = document.querySelector('.list__container');
 
 //Event Listeners
 window.addEventListener('load', repopulate);
-header.addEventListener('keyup', headerKeyupHandler);
+header.addEventListener('keyup', populateContainer);
 nav.addEventListener('click', navClickHandler);
 nav.addEventListener('keyup', navKeyupHandler);
 container.addEventListener('click', containerClickHandler);
 
 //Event Handler Functions
-function headerKeyupHandler(e) {
-  if (e.target.id === 'search-input'){
-    searchArticles();
-  };
-};
-
 function navClickHandler(e) {
   e.preventDefault();
   
@@ -56,6 +50,10 @@ function containerClickHandler(e) {
   if (e.target.classList.contains('article__input--btn')){
     makeUrgent(e);
   };
+
+  if (e.target.classList.contains('article__delete')){
+    removeArticle(e);
+  };
 };
 
 // Other Functions
@@ -65,6 +63,11 @@ function repopulate() {
 };
 
 
+function removeArticle(e){
+  taskArray[getToDoIndex(e)].deleteFromStorage(taskArray, getToDoIndex(e));
+  e.target.closest('article').remove();
+};
+
 
 function persistOnLoad() {
   taskArray.forEach(function(taskList) {
@@ -73,63 +76,63 @@ function persistOnLoad() {
 };
 
 function makeUrgent(e) {
-  var index = getToDoListId(e)
-  console.log(index)
-  console.log(document.querySelector(`#js-urg-${getToDoListId(e)}`))
-  e.target.closest('article').classList.toggle('urgent');
-  e.target.closest('footer').classList.toggle('ulUrgentBorder');
-  e.target.parentNode.parentNode.parentNode.childNodes[1].classList.toggle('urgentHeader');
-  e.target.parentNode.childNodes[3].classList.toggle('urgentTxt');
+  toggleUrgent(e);
 
   if (e.target.closest('article').classList.contains('urgent')){
     document.querySelector(`#js-urg-${getToDoListId(e)}`).src = 'images/urgent-active.svg';
+    taskArray[getToDoIndex(e)].urgent = true;
   } else {
     document.querySelector(`#js-urg-${getToDoListId(e)}`).src = 'images/urgent.svg';
+    taskArray[getToDoIndex(e)].urgent = false;
+
   };
+  taskArray[0].saveToStorage(taskArray);
 };
 
+function toggleUrgent(e) {
+  e.target.closest('article').classList.toggle('urgent');
+  e.target.closest('footer').classList.toggle('ulUrgentBorder');
+  document.querySelector(`#js-header-${getToDoListId(e)}`).classList.toggle('urgentHeader');
+  document.querySelector(`#js-urg-txt-${getToDoListId(e)}`).classList.toggle('urgentTxt');
+  document.querySelector(`#js-ul-${getToDoListId(e)}`).classList.toggle('ulUrgentBorder')
+};
 
 function checkBox(e) {
   if (e.target.src.includes('images/checkbox.svg')) {
     e.target.src = 'images/checkbox-active.svg';
-    e.target.parentNode.childNodes[1].classList.add('checked');
+    document.querySelector(`#js-p-${getTaskId(e)}`).classList.add('checked');
     toggleObjCheck(e)
   } else {
     e.target.src = 'images/checkbox.svg';
-    e.target.parentNode.childNodes[1].classList.remove('checked');
+    document.querySelector(`#js-p-${getTaskId(e)}`).classList.remove('checked');
     toggleObjCheck(e)
   };
 };
 
-
-// REFACTOR THIS CRAP
-
 function toggleObjCheck(e) {
-  taskArray.forEach(function(toDoList){
-    toDoList.tasksList.forEach(function(task){
-      if (parseInt(task.taskId) === getTaskId(e)) {
-        task.checked = !task.checked;
-        taskArray[0].saveToStorage(taskArray);
-      };
-    });
+  taskArray[getToDoIndex(e)].tasksList.forEach(function(task){
+    if (parseInt(task.taskId) === getTaskId(e)) {
+      task.checked = !task.checked;
+      taskArray[0].saveToStorage(taskArray);
+    };
   });
   toggleDelete(e)
 };
 
-// REALLY THAT UP THERE IS CRAP
-// Pull the index of the toDoList
-// only go through that toDoList
 function toggleDelete(e) {
-  var deletBtnDisable = false;
+  var deleteBtnDisable = false;
   var index = getToDoIndex(e);
-
+  var delImg;
   taskArray[index].tasksList.forEach(function(ToDo){
     if(!ToDo.checked){
-      deletBtnDisable = true;
+      deleteBtnDisable = true;
     };
   });
-
-  document.querySelector(`#js-del-${getToDoListId(e)}`).disabled = deletBtnDisable;
+  deleteBtnDisable ? delImg = 'images/delete.svg' : delImg = 'images/delete-active.svg'
+  document.querySelector(`#js-del-${getToDoListId(e)}`).src = delImg;
+  document.querySelector(`#js-del-${getToDoListId(e)}`).disabled = deleteBtnDisable; 
+  deleteBtnDisable ? document.querySelector(`#js-del-txt-${getToDoListId(e)}`).classList.remove('urgentTxt')
+  : document.querySelector(`#js-del-txt-${getToDoListId(e)}`).classList.add('urgentTxt');
   
 };
 
@@ -145,29 +148,28 @@ function getToDoListId(e) {
  return parseInt(e.target.closest('article').id);
 }
 
-
 function displayToDo(toDoList) {
   var urgent;
   var ugrentClass;
   container.insertAdjacentHTML(
     "afterbegin",
     `<article class="container__article" data-id="${toDoList.id}" id="${toDoList.id}">
-      <header class="article__header--title">
-        <h3 class="">${toDoList.title}</h3>
+      <header class="article__header--title" id="js-header-${toDoList.id}">
+        <h3 class="" id="js-h3-${toDoList.id}">${toDoList.title}</h3>
       </header>
       <!-- List inserts under here -->
-      <ul class="article__ul" id="ul${toDoList.id}"> 
+      <ul class="article__ul" id="js-ul-${toDoList.id}"> 
         <!-- insert li list -->
         ${liList(toDoList)}
       </ul>
       <footer class="article__footer bottom--crd--stn">
         <div class="article__div--urgent">
           <input type="image" src="images/urgent.svg" id="js-urg-${toDoList.id}" class="article__input--btn article__urgent">
-          <p class="article__footer--text">URGENT</p>
+          <p class="article__footer--text" id="js-urg-txt-${toDoList.id}">URGENT</p>
         </div>
         <div class="article__div--delete">
           <input type="image" src="images/delete.svg" id="js-del-${toDoList.id}" class="article__input--btn article__delete" disabled>
-          <p class="article__footer--text">DELETE</p>
+          <p class="article__footer--text" id="js-del-txt-${toDoList.id}">DELETE</p>
         </div>
       </footer>
     </article>`
@@ -180,7 +182,7 @@ function liList(taskList) {
   var liForList = '';
   taskList.tasksList.forEach(function(li) {
     li.checked ? (checked = 'checkbox-active.svg', fontStyle = 'checked') : (checked = 'checkbox.svg', fontStyle = '');
-    liForList = liForList + `<li id="${li.taskId}"><input type="image" class="article__li--checkbox" src="images/${checked}"><p class="${fontStyle}">${li.taskText}<p></li>`
+    liForList = liForList + `<li id="${li.taskId}"><input type="image" class="article__li--checkbox" src="images/${checked}"><p class="${fontStyle}" id=js-p-${li.taskId}>${li.taskText}<p></li>`
   });
   return liForList;
 };
@@ -193,8 +195,6 @@ function initialTaskArray() {
   };
 };
 
-
-
 function makeTaskList() {
   var tasksList = getTasksFromNav();
   var todoList = new ToDo({id:Date.now(),
@@ -205,7 +205,6 @@ function makeTaskList() {
   taskArray.push(todoList);
   displayToDo(todoList);
   todoList.saveToStorage(taskArray);
-
 };
 
 function getTasksFromNav(){
@@ -239,6 +238,10 @@ function clearTaskTitle() {
   document.querySelector('#task-title-input').value = '';
 };
 
+function clearTaskItem() {
+  document.querySelector('#task-item-input').value = '';
+};
+
 function addTaskToNav() {
   if (document.querySelector('#task-item-input').value !== ''){
     var taskId = Date.now();
@@ -247,16 +250,41 @@ function addTaskToNav() {
   };  
 };
 
+function clearContainer() {
+  document.querySelector('container').innerHTML = '';
+};
+
+function populateContainer(){
+  clearContainer();
+  searchArticles().forEach(element => displayToDo(element));
+
+  if (document.querySelector('#search-input').value === '') {
+    clearIdeaBoard();
+    var totalArray = qualitiesArray.concat([ideasArray]); 
+    totalArray[getActiveFilter()].forEach(function(idea) {
+     displayIdea(idea)
+   });
+  };
+
+}
+
+function searchArticles() {
+  searchedArray = taskArray.filter(function(ToDoObj) {
+    return ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
+     || ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
+  });
+  return searchedArray;
+};
+
+
+
+
 function makeNavTask(taskId) {
   listContainer.insertAdjacentHTML('beforeend',
     `<li class="nav__li" data-id="${taskId}" id="${taskId}">
         <input type='image' src='images/delete.svg' class='nav__li--delete'>
         <p class='nav__li--text'>${document.querySelector('#task-item-input').value}</p>
       </li>`);
-};
-
-function clearTaskItem() {
-  document.querySelector('#task-item-input').value = '';
 };
 
 function clearNav() {

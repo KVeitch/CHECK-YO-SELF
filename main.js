@@ -73,15 +73,18 @@ function persistOnLoad() {
 };
 
 function makeUrgent(e) {
+  var index = getToDoListId(e)
+  console.log(index)
+  console.log(document.querySelector(`#js-urg-${getToDoListId(e)}`))
   e.target.closest('article').classList.toggle('urgent');
   e.target.closest('footer').classList.toggle('ulUrgentBorder');
   e.target.parentNode.parentNode.parentNode.childNodes[1].classList.toggle('urgentHeader');
   e.target.parentNode.childNodes[3].classList.toggle('urgentTxt');
 
   if (e.target.closest('article').classList.contains('urgent')){
-    e.target.parentNode.childNodes[1].src = 'images/urgent-active.svg';
+    document.querySelector(`#js-urg-${getToDoListId(e)}`).src = 'images/urgent-active.svg';
   } else {
-    e.target.parentNode.childNodes[1].src = 'images/urgent.svg';
+    document.querySelector(`#js-urg-${getToDoListId(e)}`).src = 'images/urgent.svg';
   };
 };
 
@@ -99,32 +102,47 @@ function checkBox(e) {
 };
 
 
-
 // REFACTOR THIS CRAP
-
 
 function toggleObjCheck(e) {
   taskArray.forEach(function(toDoList){
     toDoList.tasksList.forEach(function(task){
-      if (task.taskId === getTaskId(e)) {
+      if (parseInt(task.taskId) === getTaskId(e)) {
         task.checked = !task.checked;
         taskArray[0].saveToStorage(taskArray);
       };
     });
   });
+  toggleDelete(e)
 };
 
 // REALLY THAT UP THERE IS CRAP
 // Pull the index of the toDoList
 // only go through that toDoList
+function toggleDelete(e) {
+  var deletBtnDisable = false;
+  var index = getToDoIndex(e);
 
+  taskArray[index].tasksList.forEach(function(ToDo){
+    if(!ToDo.checked){
+      deletBtnDisable = true;
+    };
+  });
+
+  document.querySelector(`#js-del-${getToDoListId(e)}`).disabled = deletBtnDisable;
+  
+};
+
+function getToDoIndex(e) {
+  return taskArray.findIndex(ToDo => ToDo.id === getToDoListId(e));
+};
 
 function getTaskId(e) {
-  return e.target.closest('li').id
+  return parseInt(e.target.closest('li').id);
 };
 
 function getToDoListId(e) {
- return e.target.closest('article').id;
+ return parseInt(e.target.closest('article').id);
 }
 
 
@@ -138,17 +156,17 @@ function displayToDo(toDoList) {
         <h3 class="">${toDoList.title}</h3>
       </header>
       <!-- List inserts under here -->
-      <ul class="crd--ul" id="" data-id=""> 
+      <ul class="article__ul" id="ul${toDoList.id}"> 
         <!-- insert li list -->
         ${liList(toDoList)}
       </ul>
       <footer class="article__footer bottom--crd--stn">
         <div class="article__div--urgent">
-          <input type="image" src="images/urgent.svg" id="btn--urgent" class="article__input--btn article__urgent">
+          <input type="image" src="images/urgent.svg" id="js-urg-${toDoList.id}" class="article__input--btn article__urgent">
           <p class="article__footer--text">URGENT</p>
         </div>
         <div class="article__div--delete">
-          <input type="image" src="images/delete.svg" id="btn--delete" class="article__input--btn article__delete" disabled>
+          <input type="image" src="images/delete.svg" id="js-del-${toDoList.id}" class="article__input--btn article__delete" disabled>
           <p class="article__footer--text">DELETE</p>
         </div>
       </footer>
@@ -202,8 +220,6 @@ function getTasksFromNav(){
   return taskList; 
 
 };
-
-
 
 function toggleMakeTaskBtn() {
   if (document.querySelector('#task-title-input').value !== '' && listContainer.innerHTML !== ''){

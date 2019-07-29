@@ -10,18 +10,16 @@ class ToDo {
     localStorage.setItem('tasks', JSON.stringify(taskArray))
   };
 
-  deleteFromStorage(tasksArray){
-
+  deleteFromStorage(tasksArray, index){
+    tasksArray.splice(index,1);
     this.saveToStorage(tasksArray)
   };
  
-  updateToDo(tasksArray){
-
-    this.saveToStorage(tasksArray)
+  updateTask(storageArray){
+    this.saveToStorage(storageArray)
   };
 
   updateTask(tasksArray){
-    
     this.saveToStorage(tasksArray)
   };
 

@@ -133,9 +133,10 @@ input {
   background-color: #C7D3D8; 
 }
 
-#urgency-btn{
+#urgent-btn{
   margin: 0px 10px;
 }
+
 nav form {
   margin-bottom: 20px;
   border-bottom: 3px solid #3C6577;
@@ -230,6 +231,7 @@ article div {
 .checked {
   color: #3C6577;
   font-style: italic;
+  text-decoration: line-through;
 }
 
 .urgent {
@@ -254,7 +256,13 @@ article div {
   color: #B23A25;
 }
 
+.urgentBtnActive {
+  color: #FFFFFF;
+  background-color: #EF4A23;
+  border: 2px solid #782616;
+  border-radius: 3px 0px 0px 3px;
 
+}
 
 
 

@@ -28,14 +28,15 @@ function navClickHandler(e) {
     removeNavLi();
     clearTaskItem();
     clearTaskTitle();
-    toggleMakeTaskBtn()
+    toggleMakeTaskBtn();
+    toggleClearAllBtn();
   };
 
   if (e.target.id === 'clear-btn'){
     clearNav();
   };
 
-  if (e.target.classList.contains('nav__li--delete' && e.key !== 'Enter')){
+  if (e.target.classList.contains('nav__li--delete')){
     removeLi(e);
   };
 };
@@ -47,7 +48,6 @@ function navKeyupHandler(e) {
   };
 
   if(e.key === 'Enter') {
-    console.log('pressed');
     keepTyping(e);
   };
 };
@@ -93,7 +93,10 @@ function removeIntro() {
 
 function keepTyping(e) {
   e.preventDefault();
+
+  console.log("enter ", e.target)
   addTaskToNav();
+  focus(e.target)
 };
 
 function removeArticle(e){
@@ -103,6 +106,7 @@ function removeArticle(e){
 };
 
 function removeLi(e) {
+  console.log('remiveLi ', e.target)
   e.target.closest('li').remove();
   toggleMakeTaskBtn()
 };
@@ -130,22 +134,23 @@ function makeUrgent(e) {
 
 function toggleUrgent(e) {
   e.target.closest('article').classList.toggle('urgent');
-  e.target.closest('footer').classList.toggle('ulUrgentBorder');
+  e.target.closest('footer').classList.toggle('ulurgentBorder');
   document.querySelector(`#js-header-${getToDoListId(e)}`).classList.toggle('urgentHeader');
   document.querySelector(`#js-urg-txt-${getToDoListId(e)}`).classList.toggle('urgentTxt');
-  document.querySelector(`#js-ul-${getToDoListId(e)}`).classList.toggle('ulUrgentBorder')
+  document.querySelector(`#js-ul-${getToDoListId(e)}`).classList.toggle('ulurgentBorder')
 };
 
 function checkBox(e) {
   if (e.target.src.includes('images/checkbox.svg')) {
     e.target.src = 'images/checkbox-active.svg';
     document.querySelector(`#js-p-${getTaskId(e)}`).classList.add('checked');
-    toggleObjCheck(e)
+    // toggleObjCheck(e)
   } else {
     e.target.src = 'images/checkbox.svg';
     document.querySelector(`#js-p-${getTaskId(e)}`).classList.remove('checked');
-    toggleObjCheck(e)
   };
+
+  toggleObjCheck(e)
 };
 
 function toggleObjCheck(e) {
@@ -190,26 +195,38 @@ function getToDoListId(e) {
 
 function displayToDo(toDoList) {
   var urgent;
-  var ugrentClass;
+  var active;
+  var disabledTgl;
+  var delTxt;
+  toDoList.urgent ? (active = '-active',urgent = 'urgent' ): (active = '', urgent = '')
+
+  toDoList.tasksList.forEach(function(ToDo){
+    if(!ToDo.checked){
+      disabledTgl = 'disabled';
+    };
+  });
+   
+  disabledTgl === 'disabled' ? delImg = 'images/delete.svg' : (delTxt = 'urgentTxt', delImg = 'images/delete-active.svg')
+  
   container.insertAdjacentHTML(
     "afterbegin",
-    `<article class="container__article" data-id="${toDoList.id}" id="${toDoList.id}">
-      <header class="article__header--title" id="js-header-${toDoList.id}">
+    `<article class="container__article ${urgent}" data-id="${toDoList.id}" id="${toDoList.id}">
+      <header class="article__header--title ${urgent}Header" id="js-header-${toDoList.id}">
         <h3 class="" id="js-h3-${toDoList.id}">${toDoList.title}</h3>
       </header>
       <!-- List inserts under here -->
-      <ul class="article__ul" id="js-ul-${toDoList.id}"> 
+      <ul class="article__ul ul${urgent}Border" id="js-ul-${toDoList.id}"> 
         <!-- insert li list -->
         ${liList(toDoList)}
       </ul>
-      <footer class="article__footer bottom--crd--stn">
+      <footer class="article__footer ul${urgent}Border bottom--crd--stn">
         <div class="article__div--urgent">
-          <input type="image" src="images/urgent.svg" id="js-urg-${toDoList.id}" class="article__input--btn article__urgent">
-          <p class="article__footer--text" id="js-urg-txt-${toDoList.id}">URGENT</p>
+          <input type="image" src="images/urgent${active}.svg" id="js-urg-${toDoList.id}" class="article__input--btn article__urgent">
+          <p class="article__footer--text ${urgent}Txt" id="js-urg-txt-${toDoList.id}">URGENT</p>
         </div>
         <div class="article__div--delete">
-          <input type="image" src="images/delete.svg" id="js-del-${toDoList.id}" class="article__input--btn article__delete" disabled>
-          <p class="article__footer--text" id="js-del-txt-${toDoList.id}">DELETE</p>
+          <input type="image" src="${delImg}" id="js-del-${toDoList.id}" class="article__input--btn article__delete" ${disabledTgl}>
+          <p class="article__footer--text ${delTxt}" id="js-del-txt-${toDoList.id}">DELETE</p>
         </div>
       </footer>
     </article>`

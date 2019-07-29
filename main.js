@@ -340,23 +340,25 @@ function clearContainer() {
 function populateContainer(){
   clearContainer();
   searchArticles().forEach(element => displayToDo(element));
-
-  // if (document.querySelector('#search-input').value === '') {
-  //   clearContainer();
-  //   var totalArray = qualitiesArray.concat([ideasArray]); 
-  //   totalArray[getActiveFilter()].forEach(function(idea) {
-  //    displayIdea(idea)
-  //  });
-  // };
-
 }
 
 function searchArticles() {
-  searchedArray = taskArray.filter(function(ToDoObj) {
-    return ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
-     || ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
-  });
-  return searchedArray;
+  var searchedArray = [];
+  if (!document.querySelector('#urgent-btn').classList.contains('urgentBtnActive')){
+    console.log('in Search if')
+    searchedArray = taskArray.filter(function(ToDoObj) {
+      return ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
+       || ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
+    });
+    return searchedArray;
+  } else {
+        searchedArray = taskArray.filter(function(ToDoObj) {
+          console.log(ToDoObj.urgent)
+      return (ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
+       || ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase())) && ToDoObj.urgent;
+    });
+    return searchedArray;
+  }
 }
 
 function makeNavTask(taskId) {

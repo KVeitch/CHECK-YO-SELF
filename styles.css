@@ -78,7 +78,7 @@ main {
 nav {
   background-color: #587A8A;
   width: 275px;
-  height: 100vh;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -164,14 +164,12 @@ h2 {
 /*Inserted Article Styles*/
 
 article {
-  /*width: 275px;*/
   background-color: #FAFDFF;
   border: 2px solid #C7D3D8;
   break-inside: avoid;
   margin-bottom: 12px;
   padding: 1px;
   color: #1F1F3D;
-  /*break-inside: avoid;*/
 }
 
 article ul {

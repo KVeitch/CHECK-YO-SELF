@@ -53,9 +53,9 @@ function navKeyupHandler(e) {
     toggleClearAllBtn();
   }
 
-  // if(e.key === 'Enter') {
-  //   keepTyping(e);
-  // }
+  if(e.key === 'Enter') {
+    keepTyping(e);
+  }
 }
 
 function containerClickHandler(e) {
@@ -160,11 +160,11 @@ function removeIntro() {
   injectIntroMessage();  
 }
 
-// function keepTyping(e) {
-//   e.preventDefault();
-//   addTaskToNav();
-//   focus(e.target);
-// }
+function keepTyping(e) {
+  e.preventDefault();
+  addTaskToNav();
+  focus(e.target);
+}
 
 function removeArticle(e){
   taskArray[getToDoIndex(e)].deleteFromStorage(taskArray, getToDoIndex(e));
@@ -402,6 +402,3 @@ function toggleClearAllBtn() {
     document.querySelector('#clear-btn').classList.add('disabled');
   }
 }
-
-
-

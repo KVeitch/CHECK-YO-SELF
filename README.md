@@ -6,7 +6,7 @@ Kirk Veitch
 
 ## Summary ##
 
-  In this project I used JavaScript, HTML, and CSS to create a functional Todo list website.  In the five days that we alotted for Check-Yo'-Self I found myself using the skill and knowledge that I acquired in the last five weeks. This project reinforced well planned out projects allow for faster completion with fewer problems.  My greatest win was being comfortable with my project allowing me to freely assist other students.
+  In this project I used JavaScript, HTML, and CSS to create a functional Todo list website.  In the five days that we alotted for Check-Yo'-Self I found myself using the skill and knowledge that I acquired in the last five weeks. This project reinforced well planned out projects allow for faster completion with fewer problems.  My greatest win was being comfortable with my progress, allowing me to freely assist other students.
   
   
 ## GitHub Pages ##  

@@ -25,19 +25,19 @@ Kirk Veitch
 
 </details>
 
-<details><summary>Full Size Comp</summary>
+<details><summary>Task Items Added to DOM</summary>
 
 ![](https://frontend.turing.io/assets/images/projects/check-yo-self/check-yo-self-02.jpg)
 
 </details>
 
-<details><summary>Full Size Comp</summary>
+<details><summary>Urgency Filter</summary>
 
 ![](https://frontend.turing.io/assets/images/projects/check-yo-self/check-yo-self-03.jpg)
 
 </details>
 
-<details><summary>Full Size Comp</summary>
+<details><summary>Mobile Comp</summary>
 
 ![](https://frontend.turing.io/assets/images/projects/check-yo-self/check-yo-self-04.jpg)
 
@@ -65,11 +65,6 @@ Kirk Veitch
 
 </details>
 
-<details><summary>Full Size Comp</summary>
-
-![](https://frontend.turing.io/assets/images/projects/check-yo-self/check-yo-self-03.jpg)
-
-</details>
 
 <details><summary>Full Size Comp</summary>
 

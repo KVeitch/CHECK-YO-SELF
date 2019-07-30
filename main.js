@@ -41,14 +41,14 @@ function navClickHandler(e) {
   }
 
   if (e.target.id === 'urgent-btn'){
-    toggleUrgentBtn()
+    toggleUrgentBtn();
   }
 }
 
 function navKeyupHandler(e) {
   if (e.target.id === 'task-title-input'  ||  e.target.id === 'task-item-input') {
     toggleMakeTaskBtn();
-    toggleClearAllBtn()
+    toggleClearAllBtn();
   }
 
   if(e.key === 'Enter') {
@@ -57,7 +57,7 @@ function navKeyupHandler(e) {
 }
 
 function containerClickHandler(e) {
-  e.preventDefault()
+  e.preventDefault();
 
   if (e.target.classList.contains('article__li--checkbox')) {
     checkBox(e);
@@ -80,27 +80,32 @@ function repopulate() {
 }
 
 function toggleUrgentBtn() {
-  console.log(document.querySelector('#urgent-btn'))
   if (document.querySelector('#urgent-btn').classList.contains('urgentBtnActive')){
     document.querySelector('#urgent-btn').classList.remove('urgentBtnActive');
-    clearContainer()
-    persistOnLoad()
+    clearContainer();
+    persistOnLoad();
   } else {
-    console.log('in else')
-    document.querySelector('#urgent-btn').classList.add('urgentBtnActive')
-    filterByUrgent()
+    document.querySelector('#urgent-btn').classList.add('urgentBtnActive');
+    filterByUrgent();
   }
 }
 
 function filterByUrgent() {
   urgentArray = [];
   urgentArray = taskArray.filter(function(toDoObj) {
-    return toDoObj.urgent === true
+    return toDoObj.urgent === true;
   });
   clearContainer();
   urgentArray.forEach(toDoObj => displayToDo(toDoObj));
-  // return urgentArray;
+  displayUrgentMsg(urgentArray)
 }
+
+function displayUrgentMsg(urgentArray){
+  if (urgentArray.length === 0){
+    container.insertAdjacentHTML('afterbegin', `<h2 id="js-h2">Please mark a list as URGENT</h2>`);
+  }
+};
+
 
 function injectIntroMessage() {
   if (container.innerHTML === ''){
@@ -131,7 +136,6 @@ function removeArticle(e){
 }
 
 function removeLi(e) {
-  console.log('remiveLi ', e.target)
   e.target.closest('li').remove();
   toggleMakeTaskBtn()
 }
@@ -148,13 +152,11 @@ function makeUrgent(e) {
 
   if (e.target.closest('article').classList.contains('urgent')){
     document.querySelector(`#js-urg-${getToDoListId(e)}`).src = 'images/urgent-active.svg';
-    taskArray[getToDoIndex(e)].urgent = true;
   } else {
     document.querySelector(`#js-urg-${getToDoListId(e)}`).src = 'images/urgent.svg';
-    taskArray[getToDoIndex(e)].urgent = false;
-  };
+  }
 
-  taskArray[0].saveToStorage(taskArray);
+  taskArray[getToDoIndex(e)].updateToDo(taskArray);
 }
 
 function toggleUrgentStyle(e) {
@@ -169,23 +171,26 @@ function checkBox(e) {
   if (e.target.src.includes('images/checkbox.svg')) {
     e.target.src = 'images/checkbox-active.svg';
     document.querySelector(`#js-p-${getTaskId(e)}`).classList.add('checked');
-    // toggleObjCheck(e)
   } else {
     e.target.src = 'images/checkbox.svg';
     document.querySelector(`#js-p-${getTaskId(e)}`).classList.remove('checked');
-  };
+  }
 
-  toggleObjCheck(e)
+  toggleObjCheck(e);
+}
+
+function getTaskListIndex(e){
+  var taskIndex = taskArray[getToDoIndex(e)].tasksList.findIndex(task => {
+    return parseInt(task.taskId) === getTaskId(e)
+  });
+
+  return taskIndex;
 }
 
 function toggleObjCheck(e) {
-  taskArray[getToDoIndex(e)].tasksList.forEach(function(task){
-    if (parseInt(task.taskId) === getTaskId(e)) {
-      task.checked = !task.checked;
-      taskArray[0].saveToStorage(taskArray);
-    };
-  });
+  var taskIndex = getTaskListIndex(e);
 
+  taskArray[getToDoIndex(e)].updateTask(taskArray, taskIndex);
   toggleDelete(e);
 }
 
@@ -282,7 +287,7 @@ function makeTaskList() {
   var todoList = new ToDo({id:Date.now(),
                            title: document.querySelector('#task-title-input').value,
                            tasksList: tasksList,
-                           urgernt: false,
+                           urgent: false,
                           });
 
   taskArray.push(todoList);
@@ -345,7 +350,6 @@ function populateContainer(){
 function searchArticles() {
   var searchedArray = [];
   if (!document.querySelector('#urgent-btn').classList.contains('urgentBtnActive')){
-    console.log('in Search if')
     searchedArray = taskArray.filter(function(ToDoObj) {
       return ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
        || ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
@@ -353,7 +357,6 @@ function searchArticles() {
     return searchedArray;
   } else {
         searchedArray = taskArray.filter(function(ToDoObj) {
-          console.log(ToDoObj.urgent)
       return (ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
        || ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase())) && ToDoObj.urgent;
     });

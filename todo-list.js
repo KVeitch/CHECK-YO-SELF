@@ -16,13 +16,11 @@ class ToDo {
   };
  
   updateTask(tasksArray, taskIndex){
-    console.log('in upTask')
     this.tasksList[taskIndex].checked = !this.tasksList[taskIndex].checked;
     this.saveToStorage(tasksArray);
   };
 
   updateToDo(tasksArray){
-    console.log('inToDo')
     this.urgent = !this.urgent
     this.saveToStorage(tasksArray)
   };

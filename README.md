@@ -10,7 +10,7 @@ Kirk Veitch
   
   
 ## GitHub Pages ##  
-http://kveitch.github.io/CHECK_YO_SELF
+http://kveitch.github.io/CHECK-YO-SELF
 
 ## Languages Used ##  
 HTML  

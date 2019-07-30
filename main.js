@@ -36,7 +36,7 @@ function navClickHandler(e) {
     clearNav();
   }
 
-  if (e.target.classList.contains('nav__li--delete')){
+  if (e.target.classList.includes('nav__li--delete')){
     removeLi(e);
   }
 
@@ -61,15 +61,15 @@ function navKeyupHandler(e) {
 function containerClickHandler(e) {
   e.preventDefault();
 
-  if (e.target.classList.contains('article__li--checkbox')) {
+  if (e.target.classList.includes('article__li--checkbox')) {
     checkBox(e);
   }
 
-  if (e.target.classList.contains('article__input--btn')){
+  if (e.target.classList.includes('article__input--btn')){
     makeUrgent(e);
   }
 
-  if (e.target.classList.contains('article__delete')){
+  if (e.target.classList.includes('article__delete')){
     removeArticle(e);
   }
 }
@@ -121,7 +121,7 @@ function toggleMakeTaskBtn() {
 }
 
 function toggleUrgentBtn() {
-  if (document.querySelector('#urgent-btn').classList.contains('urgentBtnActive')){
+  if (document.querySelector('#urgent-btn').classList.includes('urgentBtnActive')){
     document.querySelector('#urgent-btn').classList.remove('urgentBtnActive');
     clearContainer();
     persistOnLoad();
@@ -181,7 +181,7 @@ function removeLi(e) {
 function makeUrgent(e) {
   toggleUrgentStyle(e);
 
-  if (e.target.closest('article').classList.contains('urgent')){
+  if (e.target.closest('article').classList.includes('urgent')){
     document.querySelector(`#js-urg-${getToDoListId(e)}`).src = 'images/urgent-active.svg';
   } else {
     document.querySelector(`#js-urg-${getToDoListId(e)}`).src = 'images/urgent.svg';
@@ -357,7 +357,7 @@ function populateContainer(){
 
 function searchArticles() {
   var searchedArray = [];
-  if (!document.querySelector('#urgent-btn').classList.contains('urgentBtnActive')){
+  if (!document.querySelector('#urgent-btn').classList.includes('urgentBtnActive')){
     searchedArray = taskArray.filter(function(ToDoObj) {
       return ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
        || ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());

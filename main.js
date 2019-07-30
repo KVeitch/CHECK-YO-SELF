@@ -121,7 +121,7 @@ function toggleMakeTaskBtn() {
 }
 
 function toggleUrgentBtn() {
-  if (document.querySelector('#urgent-btn').classList.includes('urgentBtnActive')){
+  if (document.querySelector('#urgent-btn').classList.contains('urgentBtnActive')){
     document.querySelector('#urgent-btn').classList.remove('urgentBtnActive');
     clearContainer();
     persistOnLoad();
@@ -357,7 +357,7 @@ function populateContainer(){
 
 function searchArticles() {
   var searchedArray = [];
-  if (!document.querySelector('#urgent-btn').classList.includes('urgentBtnActive')){
+  if (!document.querySelector('#urgent-btn').classList.contains('urgentBtnActive')){
     searchedArray = taskArray.filter(function(ToDoObj) {
       return ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
        || ToDoObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());

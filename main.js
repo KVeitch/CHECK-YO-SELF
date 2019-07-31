@@ -139,7 +139,7 @@ function filterByUrgent() {
   });
 
   clearContainer();
-
+  
   urgentArray.forEach(toDoObj => displayToDo(toDoObj));
   displayUrgentMsg(urgentArray);
 }

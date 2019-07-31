@@ -9,10 +9,11 @@
   </head>
   <body>
     <header id="header">
-      <h1 class="header__text">CHECK <span class="yellow__text">YO'</span> SELF</h1>
+      <h1 class="header__text" alt="Check yo self Title">
+        CHECK <span class="yellow__text">YO'</span> SELF</h1>
       <form class="header__form">
         <input type="image" src="images/search.svg" class="search-btn" id="search-btn" alt="search button">
-        <input type="search" class="search header__input" id="search-input" placeholder="Search">
+        <input type="search" alt="search area" class="search header__input" id="search-input" placeholder="Search">
       </form>
     </header>
     <main>
@@ -20,7 +21,7 @@
         <form class="nav__form">
           <section>
             <label class="nav__lable" for="task-title-input">Task Title</label>
-            <input class="nav__input" id="task-title-input">
+            <input alt="space for tasks" class="nav__input" id="task-title-input">
           </section>
           <!-- tasks insert in the ul below -->
           <ul class="list__container"></ul>
@@ -29,14 +30,14 @@
               <label class="nav__lable" for="task-item-input">Task Item</label>
               <div class="item-input">
                 <input type="text" class="nav__input" id="task-item-input">
-                <input type="image" src="images/plus.svg" class="add-task-btn" id="add-task-btn">
+                <input type="image" alt="button to add task to the page" src="images/plus.svg" class="add-task-btn" id="add-task-btn">
               </div>
             </div>
-            <input type="button" class="btn input__btn-make disabled" id="make-task-btn" value="Make Task List" disabled>
-            <input type="button" class="btn input__btn-clear disabled" id="clear-btn" value="Clear All" disabled>
+            <input type="button" alt="button to create a task list" class="btn input__btn-make disabled" id="make-task-btn" value="Make Task List" disabled>
+            <input type="button" alt="button to clear the task and start again" class="btn input__btn-clear disabled" id="clear-btn" value="Clear All" disabled>
           </section>
         </form>
-        <input type="button" class="btn" id="urgent-btn" value="Filter by Urgency">
+        <input type="button" alt="button to display urgent task lists" class="btn" id="urgent-btn" value="Filter by Urgency">
       </nav>
       <!-- Task List Articles insert here -->
       <container class="article__holder"></container>

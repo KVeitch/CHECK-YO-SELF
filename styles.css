@@ -241,26 +241,27 @@ article div {
   padding: 1px;
 }
 
-.urgentHeader {
+.urgent header {
   background-color: #FFE89D;
   color: #1F1F3D;
 }
 
-.ulurgentBorder {
+.urgent ul,
+.urgent footer {
   border-top: 2px solid #FFC30C;
 }
-
+/*
 .urgentTxt {
   color: #B23A25;
-}
+}*/
 
 .urgentBtnActive {
   background-color: #EF4A23;
   border-radius: 3px 0px 0px 3px;
   border: 2px solid #782616;
   color: #FFFFFF;
-
 }
+
 
 @media screen and (max-width:550px) {
   header {

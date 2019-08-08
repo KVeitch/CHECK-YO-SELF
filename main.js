@@ -2,17 +2,16 @@
 var taskArray = [];
 
 // Document Query Selector
-var header = document.querySelector('#header')
-var nav =  document.querySelector('.nav');
-var container = document.querySelector('.article__holder');
+// var header = $('#header')
+// var nav =  $('.nav');
+// var container = document.querySelector('.article__holder');
 var listContainer = document.querySelector('.list__container');
-
 //Event Listeners
 window.addEventListener('load', repopulate);
-header.addEventListener('keyup', populateContainer);
-nav.addEventListener('click', navClickHandler);
-nav.addEventListener('keyup', navKeyupHandler);
-container.addEventListener('click', containerClickHandler);
+$('#header').keyup(populateContainer);
+$('.nav').click(navClickHandler);
+$('.nav').keyup(navKeyupHandler);
+$('.article__holder').click(containerClickHandler);
 
 //Event Handler Functions
 function navClickHandler(e) {
@@ -96,13 +95,13 @@ function persistOnLoad() {
 }
 
 function injectIntroMessage() {
-  if (container.innerHTML === ''){
-    container.insertAdjacentHTML('afterbegin', `<h2 id="js-h2">Please CHECK YO' SELF</h2>`);
+  if ($('container').html() === ''){
+    $('container').append(`<h2 id="js-h2">Please CHECK YO' SELF</h2>`);
   }
 }
 
 function addTaskToNav() {
-  if (document.querySelector('#task-item-input').value !== ''){
+  if ($('#task-item-input').val() !== ''){
     var taskId = Date.now();
     makeNavTask(taskId);
     clearTaskItem();
@@ -111,23 +110,23 @@ function addTaskToNav() {
 }
 
 function toggleMakeTaskBtn() {
-  if (document.querySelector('#task-title-input').value !== '' && listContainer.innerHTML !== ''){
-    document.querySelector('#make-task-btn').classList.remove('disabled');
-    document.querySelector('#make-task-btn').disabled = false;
+  if ($('#task-title-input').val() !== '' && $('.list__container').html() !== ''){
+    $('#make-task-btn').removeClass('disabled');
+    $('#make-task-btn').prop('disabled', false);
   } else {
-    document.querySelector('#make-task-btn').classList.add('disabled');
-    document.querySelector('#make-task-btn').disabled = true;
+    $('#make-task-btn').addClass('disabled');  
+    $('#make-task-btn').prop('disabled', true);
   }
 }
 
 function toggleUrgentBtn() {
   if (document.querySelector('#urgent-btn').classList.contains('urgentBtnActive')){
-    document.querySelector('#urgent-btn').classList.remove('urgentBtnActive');
+    $('#urgent-btn').removeClass('urgentBtnActive');
     clearContainer();
     persistOnLoad();
     injectIntroMessage();
   } else {
-    document.querySelector('#urgent-btn').classList.add('urgentBtnActive');
+    $('#urgent-btn').addClass('urgentBtnActive');
     filterByUrgent();
   }
 }
@@ -146,7 +145,7 @@ function filterByUrgent() {
 
 function displayUrgentMsg(urgentArray){
   if (urgentArray.length === 0){
-    container.insertAdjacentHTML('afterbegin', `<h2 id="js-h2">Please mark a list as URGENT</h2>`);
+    $('.article__holder').append(`<h2 id="js-h2">Please mark a list as URGENT</h2>`);
   }
 }
 
@@ -192,10 +191,6 @@ function makeUrgent(e) {
 
 function toggleUrgentStyle(e) {
   e.target.closest('article').classList.toggle('urgent');
-  e.target.closest('footer').classList.toggle('ulurgentBorder');
-  document.querySelector(`#js-header-${getToDoListId(e)}`).classList.toggle('urgentHeader');
-  document.querySelector(`#js-urg-txt-${getToDoListId(e)}`).classList.toggle('urgentTxt');
-  document.querySelector(`#js-ul-${getToDoListId(e)}`).classList.toggle('ulurgentBorder');
 }
 
 function checkBox(e) {
@@ -269,13 +264,10 @@ function displayToDo(toDoList) {
    
   disabledTgl === 'disabled' ? delImg = 'images/delete.svg' : (delTxt = 'urgentTxt', delImg = 'images/delete-active.svg');
   
-  container.insertAdjacentHTML(
-    "afterbegin",
-    `<article class="container__article ${urgent}" data-id="${toDoList.id}" id="${toDoList.id}">
+  $('container').append(`<article class="container__article ${urgent}" data-id="${toDoList.id}" id="${toDoList.id}">
       <header class="article__header--title ${urgent}Header" id="js-header-${toDoList.id}">
         <h3 class="" id="js-h3-${toDoList.id}">${toDoList.title}</h3>
       </header>
-      <!-- List inserts under here -->
       <ul class="article__ul ul${urgent}Border" id="js-ul-${toDoList.id}"> 
         <!-- insert li list -->
         ${liList(toDoList)}
@@ -323,31 +315,39 @@ function makeTaskList() {
 
 function getTasksFromNav(){
   var taskList = [];
-  var tasksOnNav = document.querySelectorAll('.nav__li');
-  tasksOnNav.forEach(function(li){
-    taskList.push({taskId: li.id,
-                   taskText: li.innerText,
+
+  $('.nav__li').each(function(li) {  
+    taskList.push({taskId: $(this).attr('id'),
+                   taskText: $(this).text(),
                    checked: false,
                   });
-    });
+  });
+  //removed for jquery
+  // var tasksOnNav = document.querySelectorAll('.nav__li');
+  // tasksOnNav.forEach(function(li){
+  //   taskList.push({taskId: li.id,
+  //                  taskText: li.innerText,
+  //                  checked: false,
+  //                 });
+  //   });
 
   return taskList; 
 }
 
 function removeNavLi() {
-  document.querySelector('.list__container').innerHTML = '';
+  $('.list__container').html('');
 }
 
 function clearTaskTitle() {
-  document.querySelector('#task-title-input').value = '';
+  $('#task-title-input').val('');
 }
 
 function clearTaskItem() {
-  document.querySelector('#task-item-input').value = '';
+  $('#task-item-input').val('');
 }
 
 function clearContainer() {
-  document.querySelector('container').innerHTML = '';
+  $('container').html('');
 }
 
 function populateContainer(){
@@ -376,11 +376,7 @@ function searchArticles() {
 }
 
 function makeNavTask(taskId) {
-  listContainer.insertAdjacentHTML('beforeend',
-    `<li class="nav__li" data-id="${taskId}" id="${taskId}">
-        <input type='image' src='images/delete.svg' class='nav__li--delete'>
-        <p class='nav__li--text'>${document.querySelector('#task-item-input').value}</p>
-      </li>`);
+  $('.list__container').append(`<li class="nav__li" data-id="${taskId}" id="${taskId}"><input type='image' src='images/delete.svg' class='nav__li--delete'><p class='nav__li--text'>${$('#task-item-input').val()}</p></li>`);
 }
 
 function clearNav() {

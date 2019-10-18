@@ -230,7 +230,7 @@ function toggleDelete(e) {
     };
   });
 
-  deleteBtnDisable ? delImg = 'images/delete.svg' : delImg = 'images/delete-active.svg';
+  deleteBtnDisable ? delImg = './images/delete.svg' : delImg = './images/delete-active.svg';
   document.querySelector(`#js-del-${getToDoListId(e)}`).src = delImg;
   document.querySelector(`#js-del-${getToDoListId(e)}`).disabled = deleteBtnDisable; 
   deleteBtnDisable ? document.querySelector(`#js-del-txt-${getToDoListId(e)}`).classList.remove('urgentTxt')
